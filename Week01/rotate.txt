@@ -1,0 +1,18 @@
+class Solution {
+    public void rotate(int[] nums, int k) {
+        while(k > nums.length){
+            k = k % nums.length;
+        }
+        int[] temporary = new int[nums.length];
+        for(int i = 0 ; i < nums.length ; i ++){
+        if(i < k){
+            temporary[i] = nums[nums.length - k + i];
+        }else{
+            temporary[i] = nums[i - k];
+        }
+        }
+        for(int i = 0 ; i < nums.length ; i ++){
+        nums[i] = temporary[i];
+        }
+    }
+}
