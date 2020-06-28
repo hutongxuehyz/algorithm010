@@ -1,0 +1,58 @@
+class Solution {
+   public List<String> generateParenthesis(int n) {
+        List<String> list = new ArrayList<>();
+        generateAll(new char[2*n], 0, list);
+        return list;
+    }
+
+    public void generateAll(char[] ch, int number, List<String> list){
+        if(number == ch.length){
+            if(condition(ch)){
+                list.add(new String(ch));
+                return;
+            }
+        }else{
+            ch[number] = '(';
+            generateAll(ch, number + 1, list);
+            ch[number] = ')';
+            generateAll(ch, number + 1, list);
+        }
+    }
+
+    public boolean condition(char[] ch){
+        int count = 0;
+        for(char c : ch){
+            if(c == '(') count++;
+            else count--;
+            if(count < 0) return false;
+        }
+        return count == 0;
+    }
+
+}
+
+
+
+class Solution {
+   public List<String> generateParenthesis(int n) {
+        List<String> list = new ArrayList<>();
+        generate("", n, n, list);
+        return list;
+    }
+
+    public void generate(String str, int left, int right, List<String> list){
+        if(left == 0 && right == 0){
+            list.add(str);
+            return;
+        }
+        if(left > right){
+            return;
+        }
+        if(left > 0){
+            generate(str + '(', left -1, right, list);
+        }
+        if(right > 0){
+            generate(str + ')', left, right - 1, list);
+        }
+    }
+}
